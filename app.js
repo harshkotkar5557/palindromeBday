@@ -1,3 +1,12 @@
+
+const dateInputRef = document.querySelector("#birthdate");
+const submit_button = document.querySelector("#submit_button");
+const result_section = document.querySelector(".result_section");
+const result_NextPaildrome = document.querySelector(".result_NextPaildrome");
+const result_PerviousPaildrome = document.querySelector(".result_PerviousPaildrome");
+const result_NearestPaildrome = document.querySelector(".result_NearestPaildrome");
+
+
 reverseStr = (str) => {
     var listOfCharts = str.split('');
     var reverseListOfChars = listOfCharts.reverse();
@@ -75,13 +84,48 @@ isLeapYear = (year) => {
     return false;
 }
 
+getPerviousDate = (date) => {
+    var day = date.day - 1;
+    var month = date.month;
+    var year = date.year;
+
+    daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+   
+    if (month === 3 && day === 0) {
+        if (isLeapYear(year)) {
+                day = 29;
+                month--;
+        } else {
+                day = 28;
+                month--;
+        }
+    } else {
+        if (day === 0) {
+            month--;
+            day = daysInMonth[month - 1]
+        } 
+    }
+    if (month <= 0) {
+        day = 31
+        month=12
+        year--;
+    }
+   
+    return {
+        day: day,
+        month: month,
+        year: year
+    };
+}
+
+
 getNextDate = (date) => {
     var day = date.day + 1;
     var month = date.month;
     var year = date.year;
 
+   
     daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
     if (month === 2) {
         if (isLeapYear(year)) {
             if (day > 29) {
@@ -115,7 +159,6 @@ getNextDate = (date) => {
 getNextPalindromeDate = (date) => {
     var counter = 0;
     var nextDate = getNextDate(date);
-
     while (1) {
         counter++;
         var isPalindrome = checkPalindromeForAllDateFormats(nextDate);
@@ -123,13 +166,23 @@ getNextPalindromeDate = (date) => {
             break;
         }
         var nextDate = getNextDate(nextDate);
+       
     }
     return [counter, nextDate];
 }
-
-const dateInputRef = document.querySelector("#birthdate");
-const submit_button = document.querySelector("#submit_button");
-var result_section = document.querySelector("#result_section");
+getPerviousPalindromeDate = (date) => {
+    var counterForPervious = 0;
+    var perviousDate = getPerviousDate(date)
+    while (1) {
+        counterForPervious++;
+        var isPalindrome = checkPalindromeForAllDateFormats(perviousDate);
+        if (isPalindrome) {
+            break;
+        }
+        var perviousDate = getPerviousDate(perviousDate)
+    }
+    return [counterForPervious, perviousDate];
+}
 
 
 clickHandler = () => {
@@ -150,7 +203,11 @@ clickHandler = () => {
             result_section.innerText = "Your Birthday is Palindrome"
         } else {
             var [counter, nextDate] = getNextPalindromeDate(date);
-            result_section.innerText = `Your birthdate is not palindrome, next Palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} days.`
+            var [counterForPervious, perviousDate] = getPerviousPalindromeDate(date)
+            
+            result_section.innerText = `Your birthdate is not palindrome.`
+            result_NextPaildrome.innerHTML = ` Pext Palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} days.`
+            result_PerviousPaildrome.innerHTML = ` Pervious Palindrome date is ${perviousDate.day}-${perviousDate.month}-${perviousDate.year}. You missed it by ${counterForPervious} days.`
         }
 
     }
