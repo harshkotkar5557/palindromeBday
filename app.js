@@ -84,7 +84,7 @@ isLeapYear = (year) => {
     return false;
 }
 
-getPerviousDate = (date) => {
+getPreviousDate = (date) => {
     var day = date.day - 1;
     var month = date.month;
     var year = date.year;
@@ -170,18 +170,18 @@ getNextPalindromeDate = (date) => {
     }
     return [counter, nextDate];
 }
-getPerviousPalindromeDate = (date) => {
-    var counterForPervious = 0;
-    var perviousDate = getPerviousDate(date)
+getPreviousPalindromeDate = (date) => {
+    var counterForPrevious = 0;
+    var previousDate = getPreviousDate(date)
     while (1) {
-        counterForPervious++;
-        var isPalindrome = checkPalindromeForAllDateFormats(perviousDate);
+        counterForPrevious++;
+        var isPalindrome = checkPalindromeForAllDateFormats(previousDate);
         if (isPalindrome) {
             break;
         }
-        var perviousDate = getPerviousDate(perviousDate)
+        var previousDate = getPreviousDate(previousDate)
     }
-    return [counterForPervious, perviousDate];
+    return [counterForPrevious, previousDate];
 }
 
 
@@ -203,11 +203,17 @@ clickHandler = () => {
             result_section.innerText = "Your Birthday is Palindrome"
         } else {
             var [counter, nextDate] = getNextPalindromeDate(date);
-            var [counterForPervious, perviousDate] = getPerviousPalindromeDate(date)
+            var [counterForPrevious, previousDate] = getPreviousPalindromeDate(date)
             
             result_section.innerText = `Your birthdate is not palindrome.`
-            result_NextPaildrome.innerHTML = ` Pext Palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} days.`
-            result_PerviousPaildrome.innerHTML = ` Pervious Palindrome date is ${perviousDate.day}-${perviousDate.month}-${perviousDate.year}. You missed it by ${counterForPervious} days.`
+            result_NextPaildrome.innerHTML = ` Next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} days.`
+            result_PerviousPaildrome.innerHTML = ` Previous palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}. You missed it by ${counterForPrevious} days.`
+            if (counter > counterForPrevious) {
+                result_NearestPaildrome.innerHTML = `Nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}.`
+            } else {
+                result_NearestPaildrome.innerHTML = `Nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}.`
+            }
+           
         }
 
     }
