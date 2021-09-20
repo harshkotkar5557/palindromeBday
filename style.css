@@ -6,7 +6,6 @@
 }
 body{
     font-family: 'Ubuntu', sans-serif;
-    background: #eff1f1;
 }
 .navbar_container{
     border-radius: 0.5rem;
@@ -55,12 +54,11 @@ body{
     margin: 10vh auto;
     width: 70%;
     height: 100%;
-    box-shadow: 1px 1px 2px 2px #c0b8b8;
+    box-shadow: 1px 1px 2px 3px #c0b8b8;
     border-radius: 10px;
     padding: 1.5rem 2rem;
     text-align: center;
-    background: #3781ba;
-    color: white;
+    background: #fcfcfc;
 }
 .container p{
     margin: 0.5rem 0;
@@ -95,10 +93,10 @@ body{
     padding: 0.5rem 0;
 }
 .input_section input{
+    border: 1px solid black;
     outline: none;
     border-radius: 0.2rem;
     padding: 0.3rem;
-    border: none
 }
  button{
     background: black;
