@@ -215,8 +215,8 @@ clickHandler = () => {
                 
                 result_section.innerText = `Your birthdate is not palindrome.😕`
                 result_section.style.color= 'red'
-                result_NextPaildrome.innerHTML = ` Next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} days.`
-                result_PerviousPaildrome.innerHTML = ` Previous palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}. You missed it by ${counterForPrevious} days.`
+                result_NextPaildrome.innerHTML = ` Next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${counter} ${counter === 1 ? 'day':'days'}.`
+                result_PerviousPaildrome.innerHTML = ` Previous palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}. You missed it by ${counterForPrevious} ${counterForPrevious=== 1 ? 'day':'days'}.`
                 if (counter > counterForPrevious) {
                     result_NearestPaildrome.innerHTML = `Nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}.`
                 } else {
