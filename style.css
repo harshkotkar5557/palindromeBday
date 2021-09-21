@@ -99,6 +99,7 @@ body{
     padding: 0.3rem;
 }
  button{
+     cursor: pointer;
     background: black;
     margin: 1rem;
     border: none;
